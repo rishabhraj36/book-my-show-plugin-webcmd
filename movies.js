@@ -3,7 +3,7 @@
 // Uses the movie-listing factory with the `now-showing-movies` endpoint.
 // Includes rating and votes columns on top of the base listing.
 import { cli } from '@agentrhq/webcmd/registry';
-import { makeMovieListingCommand } from './utils.js';
+import { makeMovieListingCommand } from './utils.mjs';
 
 cli(makeMovieListingCommand({
     name: 'movies',

@@ -9,7 +9,7 @@ import {
     BMS_BASE, bmsFetch, buildProvenance, cleanText,
     requireBoundedInt, requireString, validateCity,
     bmsTitle, bmsLanguage, bmsGenre, bmsRating, bmsDate,
-} from './utils.js';
+} from './utils.mjs';
 
 // Search responses use a different shape from listing endpoints — the result
 // array can appear under docs, data, arrEvents, or at the top level.
