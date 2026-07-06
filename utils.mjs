@@ -165,6 +165,17 @@ export function extractMovieCards(data) {
     return cards;
 }
 
+export function filterMovieCards(cards, { query = '', language = '' } = {}) {
+    const q = String(query ?? '').trim().toLowerCase();
+    const lang = String(language ?? '').trim().toLowerCase();
+
+    return cards.filter((card) => {
+        if (q && !String(card.title ?? '').toLowerCase().includes(q)) return false;
+        if (lang && !String(card.language ?? '').toLowerCase().includes(lang)) return false;
+        return true;
+    });
+}
+
 // ─── Text Cleaners ───
 
 export function cleanText(value) {
@@ -309,21 +320,23 @@ export function makeMovieListingCommand({
         browser: true,
         args: [
             { name: 'city', positional: true, type: 'string', required: true, help: 'City slug (e.g. mumbai, delhi-ncr, bengaluru)' },
+            { name: 'language', type: 'string', default: '', help: 'Optional language filter (e.g. hindi, english, tamil)' },
             { name: 'limit', type: 'int', default: 20, help: 'Max rows to return (1-100)' },
         ],
         columns: [...baseColumns, ...extraColumns, 'sourceUrl', 'fetchedAt', 'url'],
         func: async (page, args) => {
             const city = validateCity(args.city);
+            const language = String(args.language ?? '').trim();
             const limit = requireBoundedInt(args.limit, 20, 1, 100, 'limit');
 
             const pageUrl = `${BMS_BASE}/explore/${pageSlug}-${city}`;
             const data = await bmsDiscoverPage(page, pageUrl, `bookmyshow ${name} ${city}`);
-            const movies = extractMovieCards(data);
+            const movies = filterMovieCards(extractMovieCards(data), { language });
 
             if (movies.length === 0) {
                 throw new EmptyResultError(
                     `bookmyshow ${name}`,
-                    `No ${name} movies found for city "${city}".`,
+                    `No ${name} movies found for city "${city}"${language ? ` and language "${language}"` : ''}.`,
                 );
             }
 
@@ -370,4 +383,5 @@ export const __test__ = {
     bmsPrice,
     bmsSynopsis,
     unwrapBmsArray,
+    filterMovieCards,
 };

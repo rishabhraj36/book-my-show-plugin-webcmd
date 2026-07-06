@@ -20,14 +20,14 @@ webcmd plugin install github:rishabhraj36/book-my-show-plugin-webcmd
 
 | Command | Type | Description |
 |---------|------|-------------|
-| `bookmyshow/movies` | JavaScript | List currently showing movies for a city |
-| `bookmyshow/search` | JavaScript | Search movies, events, and venues |
+| `bookmyshow/movies` | JavaScript | List currently showing movies for a city, optionally filtered by language |
+| `bookmyshow/search` | JavaScript | Search currently showing movies for a city, optionally filtered by language |
 
 ## Examples
 
 ```bash
-webcmd bookmyshow movies mumbai --limit 10 -f json
-webcmd bookmyshow search "avatar" --city mumbai --limit 10 -f json
+webcmd bookmyshow movies mumbai --language hindi --limit 10 -f json
+webcmd bookmyshow search "spider" --city mumbai --language english --limit 10 -f json
 ```
 
 ## Development
@@ -40,8 +40,8 @@ webcmd plugin install file:///path/to/book-my-show-plugin-webcmd
 webcmd list | grep bookmyshow
 
 # Run a command
-webcmd bookmyshow movies mumbai --limit 10
-webcmd bookmyshow search "avatar" --city mumbai --limit 10
+webcmd bookmyshow movies mumbai --language hindi --limit 10
+webcmd bookmyshow search "spider" --city mumbai --language english --limit 10
 ```
 
 ## Source And License
