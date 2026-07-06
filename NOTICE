@@ -1,0 +1,7 @@
+This plugin includes BookMyShow adapter files copied from:
+https://github.com/Mr-Ashish/webcmd/tree/main/clis/bookmyshow
+
+Source commit:
+8e592b2 Merge pull request #1 from Mr-Ashish/feat/bookmyshow-adapter
+
+The upstream repository is licensed under Apache-2.0.

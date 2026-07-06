@@ -1,0 +1,6 @@
+{
+  "name": "bookmyshow",
+  "version": "0.1.0",
+  "description": "BookMyShow movie discovery commands for Webcmd",
+  "webcmd": ">=0.2.0"
+}
